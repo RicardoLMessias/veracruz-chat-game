@@ -1,0 +1,16 @@
+{
+  "name": "twitch-dashboard",
+  "private": true,
+  "description": "Sobe o sistema inteiro (Laravel, agendador, fila, Vite e túnel) com um comando: npm run dev",
+  "scripts": {
+    "dev": "concurrently --names api,agenda,fila,web,tunel --prefix-colors blue,magenta,yellow,green,cyan \"npm:dev:api\" \"npm:dev:schedule\" \"npm:dev:queue\" \"npm:dev:web\" \"npm:dev:tunnel\"",
+    "dev:api": "cd backend-laravel && php artisan serve --port=8000",
+    "dev:schedule": "cd backend-laravel && php artisan schedule:work",
+    "dev:queue": "cd backend-laravel && php artisan queue:work --tries=3",
+    "dev:web": "npm --prefix frontend run dev",
+    "dev:tunnel": "node scripts/tunnel.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5"
+  }
+}
